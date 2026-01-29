@@ -2,7 +2,7 @@ import React from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import VideoCard from '../components/VideoCard';
-import { Search, FileText } from 'lucide-react';
+import { Search } from 'lucide-react';
 
 const SearchResults: React.FC = () => {
   const [searchParams] = useSearchParams();

@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { RefreshCw, X, Circle, ArrowLeft, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const TicTacToe: React.FC = () => {
   const { t, dir } = useLanguage();
-  const [board, setBoard] = useState<string[]>(Array(9).fill(null));
+  // Properly typed to allow strings or nulls
+  const [board, setBoard] = useState<(string | null)[]>(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
   const [winner, setWinner] = useState<string | null>(null);
   const ArrowIcon = dir === 'rtl' ? ArrowRight : ArrowLeft;
 
-  const checkWinner = (squares: string[]) => {
+  // Updated signature to accept (string | null)[]
+  const checkWinner = (squares: (string | null)[]) => {
     const lines = [
       [0, 1, 2], [3, 4, 5], [6, 7, 8],
       [0, 3, 6], [1, 4, 7], [2, 5, 8],

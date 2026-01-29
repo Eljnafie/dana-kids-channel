@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Star, Sun, Moon, Cloud, Heart, Music, Zap, Smile, RefreshCw, Trophy, ArrowLeft, ArrowRight } from 'lucide-react';
-import Mascot from '../components/Mascot';
 import { Link } from 'react-router-dom';
 
 interface Card {

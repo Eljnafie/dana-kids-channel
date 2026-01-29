@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShoppingBag, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import SEO from '../components/SEO';
 import ParentalGate from '../components/ParentalGate';

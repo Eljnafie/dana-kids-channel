@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Quiz } from '../types';
+import type { Quiz } from '../types';
 import { Play, CheckCircle, XCircle, ArrowLeft, ArrowRight, RotateCcw, Brain } from 'lucide-react';
 import Mascot from '../components/Mascot';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -131,7 +131,6 @@ const Quizzes: React.FC = () => {
 
   // --- QUIZ PLAYER VIEW ---
   const question = activeQuiz.questions[currentQuestionIndex];
-  const isCorrect = selectedOption !== null && selectedOption === question.correctIndex;
 
   // --- RESULTS SCREEN ---
   if (showResult) {

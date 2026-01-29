@@ -1,4 +1,4 @@
-import { Video, Activity, Product, TeamMember, Quiz, BlogPost, Song, GameItem } from './types';
+import type { Video, Activity, Product, TeamMember, Quiz, BlogPost, Song, GameItem } from './types';
 
 export const CHANNEL_URL = "https://www.youtube.com/@%D8%AF%D9%86%D8%A7%D9%84%D9%84%D8%A3%D8%B7%D9%81%D8%A7%D9%84";
 
@@ -162,7 +162,6 @@ const GAMES_AR: GameItem[] = [
 
 export const TRANSLATIONS = {
   en: {
-    // ... existing ...
     nav_home: 'Home',
     nav_videos: 'Videos',
     nav_activities: 'Activities',
@@ -309,11 +308,9 @@ export const TRANSLATIONS = {
     contact_message: 'Message',
     contact_btn_send: 'Send Message',
     contact_disclaimer: 'For business inquiries regarding the "Dana for Children" YouTube channel, please use the form above. We do not accept unsolicited video submissions.',
-    // Radio
     radio_title: "Dana's Radio"
   },
   ar: {
-    // ... existing ...
     nav_home: 'الرئيسية',
     nav_videos: 'فيديوهات',
     nav_activities: 'نشاطات',
@@ -460,7 +457,6 @@ export const TRANSLATIONS = {
     contact_message: 'الرسالة',
     contact_btn_send: 'إرسال الرسالة',
     contact_disclaimer: 'للاستفسارات التجارية بخصوص قناة "دنا للأطفال" على يوتيوب، يرجى استخدام النموذج أعلاه. نحن لا نقبل تقديمات الفيديو غير المطلوبة.',
-    // Radio
     radio_title: 'راديو دنا'
   }
 };

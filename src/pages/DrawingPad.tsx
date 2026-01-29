@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { Eraser, Download, Trash2, Palette, ArrowLeft, ArrowRight, Brush } from 'lucide-react';
+import { Eraser, Download, Trash2, ArrowLeft, ArrowRight, Brush } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const DrawingPad: React.FC = () => {

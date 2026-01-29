@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import { TRANSLATIONS } from '../constants';
 import { useContent } from './ContentContext';
-import { ContentData } from '../types';
+import type { ContentData } from '../types';
 
 type Language = 'en' | 'ar';
 

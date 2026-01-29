@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Video } from '../types';
+import type { Video } from '../types';
 import { useLanguage } from '../contexts/LanguageContext';
 import { YOUTUBE_CONFIG } from '../constants';
 

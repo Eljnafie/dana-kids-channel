@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useContent } from '../contexts/ContentContext';
-import { AppContent, Video, Product, BlogPost, Song, Activity, TeamMember, Quiz, GameItem, Question } from '../types';
+import type { AppContent, Video, Product, BlogPost, Song, Activity, TeamMember, Question } from '../types';
 import { Trash2, Plus, RotateCcw, Lock, Video as VideoIcon, ShoppingBag, BookOpen, Music, Users, Puzzle, Palette, Type, Search, Gamepad2, LogOut, Save, ArrowLeft, CheckCircle, Edit3, Image } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 

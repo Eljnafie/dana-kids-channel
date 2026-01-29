@@ -9,7 +9,7 @@ interface ParentalGateProps {
 }
 
 const ParentalGate: React.FC<ParentalGateProps> = ({ isOpen, onClose, onSuccess }) => {
-  const { t, dir } = useLanguage();
+  const { dir } = useLanguage();
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState<number>(0);
   const [userInput, setUserInput] = useState('');

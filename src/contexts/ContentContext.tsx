@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import { DATA } from '../constants';
-import { AppContent, Video, BlogPost, Product, Song, Activity } from '../types';
+import type { AppContent, Video } from '../types';
 
 interface ContentContextProps {
   content: AppContent;

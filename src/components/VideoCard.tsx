@@ -1,7 +1,7 @@
 import React from 'react';
 import { Play, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Video } from '../types';
+import type { Video } from '../types';
 import { useUser } from '../contexts/UserContext';
 
 interface VideoCardProps {
