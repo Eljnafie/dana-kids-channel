@@ -24,13 +24,14 @@ const SEO: React.FC<SEOProps> = ({
   const siteName = language === 'ar' ? 'دنا للأطفال' : 'Dana for Children';
   const docTitle = `${title} | ${siteName}`;
 
-  // Base Schema for the Organization (E-E-A-T)
+  // Organization Schema (For Google Knowledge Graph / Search Logo)
+  // Ensure the 'logo' URL is a public, crawlable image URL.
   const orgSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Dana for Children",
     "url": siteUrl,
-    "logo": "https://picsum.photos/seed/dana/512/512",
+    "logo": "https://picsum.photos/seed/dana_logo/512/512", // Ideally, replace this with a permanent URL to your logo file
     "sameAs": [
       "https://www.youtube.com/@دناللأطفال",
       "https://instagram.com/danaforchildren",
@@ -71,8 +72,6 @@ const SEO: React.FC<SEOProps> = ({
       <link rel="alternate" href={`${siteUrl}${path}?lang=ar`} hrefLang="ar" />
 
       {/* JSON-LD Structured Data */}
-      {/* Note: React 19 does not strictly hoist inline scripts to head by default unless specified as resource, 
-          but they work fine in the body for SEO purposes. */}
       <script type="application/ld+json">
         {JSON.stringify(schema || orgSchema)}
       </script>
