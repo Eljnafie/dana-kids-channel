@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ShoppingBag, ExternalLink } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import SEO from '../components/SEO';
+import ParentalGate from '../components/ParentalGate';
 
 const Shop: React.FC = () => {
   const { data, t } = useLanguage();
+  const [gateOpen, setGateOpen] = useState(false);
+  const [pendingUrl, setPendingUrl] = useState<string | null>(null);
 
   // Create schema for multiple products
   const productsSchema = {
@@ -28,6 +31,18 @@ const Shop: React.FC = () => {
     }))
   };
 
+  const handleBuyClick = (url: string) => {
+    setPendingUrl(url);
+    setGateOpen(true);
+  };
+
+  const onGateSuccess = () => {
+    if (pendingUrl) {
+      window.open(pendingUrl, '_blank', 'noopener,noreferrer');
+      setPendingUrl(null);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-yellow-50 py-12">
       <SEO 
@@ -36,6 +51,12 @@ const Shop: React.FC = () => {
         type="product"
         schema={productsSchema}
         path="/shop"
+      />
+
+      <ParentalGate 
+        isOpen={gateOpen} 
+        onClose={() => setGateOpen(false)} 
+        onSuccess={onGateSuccess} 
       />
 
       <div className="container mx-auto px-4">
@@ -57,16 +78,14 @@ const Shop: React.FC = () => {
                     height="400"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                  />
-                 <a 
-                    href={product.externalUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute bottom-4 ltr:right-4 rtl:left-4 bg-dana-coral text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform active:scale-95"
+                 <button 
+                    onClick={() => handleBuyClick(product.externalUrl)}
+                    className="absolute bottom-4 ltr:right-4 rtl:left-4 bg-dana-coral text-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform active:scale-95 z-10 cursor-pointer"
                     title={t('shop_btn_buy')}
                     aria-label={`${t('shop_btn_buy')} ${product.name}`}
                 >
                     <ExternalLink size={24} />
-                 </a>
+                 </button>
               </div>
               <div className="p-6 flex-1 flex flex-col justify-between">
                  <div>
@@ -75,14 +94,12 @@ const Shop: React.FC = () => {
                  </div>
                  <div className="flex justify-between items-center mt-4">
                     <p className="font-body text-xl text-dana-green font-bold">${product.price.toFixed(2)}</p>
-                    <a 
-                        href={product.externalUrl}
-                        target="_blank"
-                        rel="noopener noreferrer" 
-                        className="text-sm font-bold text-dana-coral hover:underline flex items-center gap-1"
+                    <button 
+                        onClick={() => handleBuyClick(product.externalUrl)}
+                        className="text-sm font-bold text-dana-coral hover:underline flex items-center gap-1 bg-transparent border-none cursor-pointer"
                     >
                         {t('shop_btn_buy')} <ExternalLink size={14} />
-                    </a>
+                    </button>
                  </div>
               </div>
             </div>

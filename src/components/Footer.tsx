@@ -1,13 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Youtube, Instagram, Facebook, Mail, Lock } from 'lucide-react';
 import { CHANNEL_URL } from '../constants';
 import { useLanguage } from '../contexts/LanguageContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import ParentalGate from './ParentalGate';
 
 const Footer: React.FC = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
+  const [gateOpen, setGateOpen] = useState(false);
+  const [pendingAction, setPendingAction] = useState<(() => void) | null>(null);
+
+  const handleProtectedAction = (action: () => void) => {
+    setPendingAction(() => action);
+    setGateOpen(true);
+  };
+
+  const onGateSuccess = () => {
+    if (pendingAction) {
+      pendingAction();
+      setPendingAction(null);
+    }
+  };
+
+  const openExternal = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
 
   return (
+    <>
+    <ParentalGate 
+        isOpen={gateOpen} 
+        onClose={() => setGateOpen(false)} 
+        onSuccess={onGateSuccess} 
+    />
     <footer className="bg-dana-green pt-12 pb-6 border-t-8 border-dana-yellow">
       <div className="container mx-auto px-4 text-white">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-center md:text-start">
@@ -19,15 +45,15 @@ const Footer: React.FC = () => {
               {t('footer_desc')}
             </p>
             <div className="flex gap-4">
-              <a href={CHANNEL_URL} target="_blank" rel="noreferrer" className="bg-white text-red-600 p-2 rounded-full hover:scale-110 transition-transform shadow-md">
+              <button onClick={() => handleProtectedAction(() => openExternal(CHANNEL_URL))} className="bg-white text-red-600 p-2 rounded-full hover:scale-110 transition-transform shadow-md">
                 <Youtube size={24} />
-              </a>
-              <a href="#" className="bg-white text-pink-500 p-2 rounded-full hover:scale-110 transition-transform shadow-md">
+              </button>
+              <button onClick={() => handleProtectedAction(() => openExternal('https://instagram.com'))} className="bg-white text-pink-500 p-2 rounded-full hover:scale-110 transition-transform shadow-md">
                 <Instagram size={24} />
-              </a>
-              <a href="#" className="bg-white text-blue-600 p-2 rounded-full hover:scale-110 transition-transform shadow-md">
+              </button>
+              <button onClick={() => handleProtectedAction(() => openExternal('https://facebook.com'))} className="bg-white text-blue-600 p-2 rounded-full hover:scale-110 transition-transform shadow-md">
                 <Facebook size={24} />
-              </a>
+              </button>
             </div>
           </div>
 
@@ -61,12 +87,16 @@ const Footer: React.FC = () => {
             <Link to="/cookies" className="hover:text-white underline">{t('nav_cookies')}</Link>
           </div>
           <p className="opacity-75 mt-2">{t('footer_safety')}</p>
-          <Link to="/admin" className="text-white/20 hover:text-white transition-colors flex items-center gap-1 text-xs mt-2">
+          <button 
+            onClick={() => handleProtectedAction(() => navigate('/admin'))}
+            className="text-white/20 hover:text-white transition-colors flex items-center gap-1 text-xs mt-2 cursor-pointer bg-transparent border-none"
+          >
             <Lock size={12} /> Admin
-          </Link>
+          </button>
         </div>
       </div>
     </footer>
+    </>
   );
 };
 
